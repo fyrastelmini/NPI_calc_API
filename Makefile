@@ -5,9 +5,12 @@ install:
 test:
 	cd calculator_app &&\
 	python -m pytest -vv
+test_no_ui:
+	cd calculator_app_no_ui &&\
+	python -m pytest -vv
 
 format:
-	black calculator_app/*.py
+	black */*.py
 
 lint:
 	pylint --disable=R,C */*.py
@@ -18,4 +21,4 @@ run:
 compose:
 	docker-compose up -d		
 
-all: install lint format test
+all: install lint format test test_no_ui

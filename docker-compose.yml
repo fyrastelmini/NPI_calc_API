@@ -7,6 +7,14 @@ services:
       - calculator_network
     depends_on:
       - calculator_db
+  calculator_app_no_ui:
+    build: calculator_app_no_ui/
+    ports:
+      - "5001:5001"
+    networks:
+      - calculator_network
+    depends_on:
+      - calculator_db
   calculator_db:
     image: postgres:13
     environment:
