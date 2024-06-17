@@ -53,3 +53,34 @@ def insert_into_db(operation: str, result: str):
 
     cur.close()
     conn.close()
+
+def view_database():
+    conn = psycopg2.connect(
+        dbname="calculator",
+        user="calculator",
+        password="calculator",
+        host="calculator_db"
+    )
+
+    cur = conn.cursor()
+
+    cur.execute(
+        sql.SQL(
+            "SELECT * FROM operations;"
+        )
+    )
+
+    rows = cur.fetchall()
+    data = []
+    for row in rows:
+        data.append({
+            "id": row[0],
+            "operation": row[1],
+            "result": row[2],
+            "datetime": str(row[3]),
+        })
+
+    cur.close()
+    conn.close()
+
+    return data

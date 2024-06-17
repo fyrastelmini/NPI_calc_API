@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Base de données</title>
+    <style>
+        body {
+            background-color: #A0522D;
+            color: #FFF8DC;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            padding-top: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #FFF8DC;
+            color: #000000;
+        }
+        th, td {
+            border: 1px solid #000000;
+            padding: 15px;
+            text-align: left;
+        }
+        th {
+            background-color: #8B4513;
+            color: #FFF8DC;
+        }
+        button {
+            background-color: #8B4513;
+            color: #FFF8DC;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            margin: 10px 0;
+            width: 80%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Base de données</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Opération</th>
+                <th>Résultat</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if data %}
+                {% for item in data %}
+                <tr>
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.operation }}</td>
+                    <td>{{ item.result }}</td>
+                    <td>{{ item.datetime }}</td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="4">Aucune donnée disponible</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+    <button onclick="location.href='/'">Retour</button>
+</body>
+</html>
