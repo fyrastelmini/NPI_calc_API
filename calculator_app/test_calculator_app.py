@@ -74,10 +74,12 @@ def test_index_route():
     assert response.status_code == 200
     assert "<title>Calculatrice NPI</title>" in response.text
 
+
 def test_index_calculate_route():
     response = client.get("/")
     assert response.status_code == 200
     assert "<title>Calculatrice NPI</title>" in response.text
+
 
 def test_view_data_route():
     mock_data = [
@@ -104,6 +106,3 @@ def test_download_csv_route():
             response.headers["Content-Disposition"] == "attachment; filename=data.csv"
         )
         assert response.content.startswith("opération,résultat,date\n".encode("utf-8"))
-
-
-
