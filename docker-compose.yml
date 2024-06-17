@@ -13,13 +13,10 @@ services:
       POSTGRES_USER: calculator
       POSTGRES_PASSWORD: calculator
       POSTGRES_DB: calculator
-    ports:
-      - "5432:5432"
     networks:
       - calculator_network
     volumes:
       - calculator_db_data:/var/lib/postgresql/data
-      - ./init_db.sh:/docker-entrypoint-initdb.d/init_db.sh
 networks:
   calculator_network:
     driver: bridge
