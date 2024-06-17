@@ -11,4 +11,7 @@ format:
 lint:
 	pylint --disable=R,C */*.py
 
+run:
+	uvicorn calculator_app.calculator_app:app --reload
+
 all: install lint format test

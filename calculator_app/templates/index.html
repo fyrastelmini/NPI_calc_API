@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculatrice NPI</title>
+    <style>
+        body {
+            background-color: #A0522D;
+            color: #FFF8DC;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            padding-top: 20px;
+        }
+        form {
+            text-align: center;
+            background-color: #D2691E;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        input[type="text"], button {
+            margin: 10px 0;
+            padding: 10px;
+            width: 80%;
+        }
+        input[type="submit"], button {
+            background-color: #8B4513;
+            color: #FFF8DC;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+        h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calculatrice de Notation Polonaise Inverse</h1>
+    <form action="/submit" method="post">
+        <input type="text" name="text" placeholder="Votre opération" required>
+        <br>
+        <input type="text" name="result" placeholder="Résultat" readonly>
+        <br>
+        <input type="submit" value="Soumettre">
+        <br>
+        <button type="button" onclick="location.href='/view_data'">Voir les données</button>
+        <br>
+        <button type="button" onclick="location.href='/download_csv'">Télécharger le .csv</button>
+    </form>
+</body>
+</html>
