@@ -13,6 +13,8 @@ services:
       POSTGRES_USER: calculator
       POSTGRES_PASSWORD: calculator
       POSTGRES_DB: calculator
+    ports:
+      - "5432:5432"
     networks:
       - calculator_network
     volumes:
