@@ -23,10 +23,14 @@ async def calculate(request: Request, text: str = Form(...)):
         "index.html", {"request": request, "result": result, "operation": text}
     )
 
+
 @app.get("/view_data")
 def view_data(request: Request):
     data = view_database()
-    return templates.TemplateResponse("view_data.html", {"request": request, "data": data})
+    return templates.TemplateResponse(
+        "view_data.html", {"request": request, "data": data}
+    )
+
 
 @app.get("/download_csv")
 def download_csv():
@@ -35,4 +39,8 @@ def download_csv():
     for row in data:
         print(row)
         csv += f"{row['operation']},{row['result']},{row['datetime']}\n"
-    return Response(content=csv, media_type="text/csv", headers={"Content-Disposition": "attachment; filename=data.csv"})
+    return Response(
+        content=csv,
+        media_type="text/csv",
+        headers={"Content-Disposition": "attachment; filename=data.csv"},
+    )
