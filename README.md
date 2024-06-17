@@ -13,10 +13,11 @@ ou
 docker-compose up
 ```
 # Versions:
-Il existe deux versions de cet API, les deux connectés sur la même base de données:
-    - Calculator app: Version avec une interface utilisateur web, se lance sur le port 5000
-    - Calculator app (no UI): API simple sans interface web, se lance sur le port 5001
-Les deux versions ont leurs documentations sous le chemin /docs
+Il existe deux versions de cet API, les deux connectées sur la même base de données :
+- **Calculator app** : Version avec une interface utilisateur web, se lance sur le port 5000
+- **Calculator app (no UI)** : API simple sans interface web, se lance sur le port 5001
+
+Les deux versions ont leurs documentations sous le chemin `/docs`.
 
 # Pour le développement:
 # Installation, Pytest, Linting, Formatting
