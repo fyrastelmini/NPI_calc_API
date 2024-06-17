@@ -14,6 +14,8 @@ lint:
 
 run:
 	docker-compose up
-		
+
+compose:
+	docker-compose up -d		
 
 all: install lint format test
