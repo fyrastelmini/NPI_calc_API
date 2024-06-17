@@ -39,10 +39,18 @@
 </head>
 <body>
     <h1>Calculatrice de Notation Polonaise Inverse</h1>
-    <form action="/submit" method="post">
+    <form action="/" method="post">
+        {% if operation %}
+        <input type="text" name="text" placeholder="Votre opération" value="{{ operation }}" required>
+        {% else %}
         <input type="text" name="text" placeholder="Votre opération" required>
+        {% endif %}
         <br>
+        {% if result %}
+        <input type="text" name="result" placeholder="Résultat" value="{{ result }}" readonly>
+        {% else %}
         <input type="text" name="result" placeholder="Résultat" readonly>
+        {% endif %}
         <br>
         <input type="submit" value="Soumettre">
         <br>
