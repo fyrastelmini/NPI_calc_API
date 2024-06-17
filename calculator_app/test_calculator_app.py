@@ -7,4 +7,4 @@ client = TestClient(app)
 def test_index_route():
     response = client.get("/")
     assert response.status_code == 200
-    assert response.json() == {"Hello": "World"}
+    assert "<title>Calculatrice NPI</title>" in response.text

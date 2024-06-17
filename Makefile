@@ -1,8 +1,9 @@
 install:
 	pip install --upgrade pip &&\
 		pip install pytest &&\
-			pip install -r requirements.txt
+			pip install -r calculator_app/requirements.txt
 test:
+	cd calculator_app &&\
 	python -m pytest -vv
 
 format:
@@ -12,6 +13,7 @@ lint:
 	pylint --disable=R,C */*.py
 
 run:
-	uvicorn calculator_app.calculator_app:app --reload
+	docker-compose up
+		
 
 all: install lint format test
