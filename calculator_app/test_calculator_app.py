@@ -4,6 +4,7 @@ from unittest.mock import patch, MagicMock
 from utilities import view_database, insert_into_db, calculate_rpn
 from psycopg2 import sql
 from datetime import datetime
+import pytest
 
 client = TestClient(app)
 
@@ -75,10 +76,37 @@ def test_index_route():
     assert "<title>Calculatrice NPI</title>" in response.text
 
 
-def test_index_calculate_route():
-    response = client.get("/")
-    assert response.status_code == 200
-    assert "<title>Calculatrice NPI</title>" in response.text
+def test_calculate_route():
+    with patch("calculator_app.calculate_rpn") as mock_calculate_rpn, patch(
+        "calculator_app.insert_into_db"
+    ) as mock_insert_into_db:
+        # Définir la valeur de retour de la fonction simulée
+        mock_calculate_rpn.return_value = 4
+
+        response = client.post("/", data={"text": "2 2 +"})
+
+        # Vérifier que les fonctions ont été appelées
+        mock_calculate_rpn.assert_called_once_with("2 2 +")
+        mock_insert_into_db.assert_called_once_with("2 2 +", 4)
+
+        assert response.status_code == 200
+        assert "4" in response.text
+
+
+@pytest.mark.parametrize(
+    "input_data,expected_error",
+    [
+        (
+            "22+2",
+            "Erreur: Mauvais format d'expression. Utilisez des espaces entre les opérandes et les opérateurs. could not convert string to float: '22+2'",
+        ),
+        ("22 +", "Erreur: Terme manquant. pop from empty list"),
+    ],
+)
+def test_calculate_route_invalid(input_data, expected_error):
+    response = client.post("/", data={"text": input_data})
+    assert response.status_code == 400
+    assert expected_error in response.text
 
 
 def test_view_data_route():

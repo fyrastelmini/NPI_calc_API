@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Request, Form, Response
+from fastapi import FastAPI, Request, Form, Response, HTTPException
 from fastapi.templating import Jinja2Templates
 from utilities import calculate_rpn, insert_into_db, view_database
 
@@ -22,12 +22,22 @@ async def calculate(request: Request, text: str = Form(...)):
     Route pour calculer une expression NPI (Notation Polonaise Inverse).
     Insère le résultat dans la base de données.
     En cas d'erreur de calcul, renvoie un message d'erreur.
+    - **text**: L'expression NPI à calculer.
+    IMPORTANT: Il faut mettre des espaces entre les opérandes et les opérateurs.
     """
     try:
         result = calculate_rpn(text)
         insert_into_db(text, result)
     except ValueError as e:
-        result = "Erreur: " + str(e)
+        raise HTTPException(
+            status_code=400,
+            detail="Erreur: Mauvais format d'expression. Utilisez des espaces entre les opérandes et les opérateurs. "
+            + str(e),
+        ) from e
+    except IndexError as e:
+        raise HTTPException(
+            status_code=400, detail="Erreur: Terme manquant. " + str(e)
+        ) from e
     return templates.TemplateResponse(
         "index.html", {"request": request, "result": result, "operation": text}
     )
