@@ -26,7 +26,9 @@ def calculate_rpn(expression: str) -> float:
     return stack.pop()
 
 
-def insert_into_db(operation: str, result: str, date=datetime.now()):
+def insert_into_db(operation: str, result: str, date=None):
+    if date == None:
+        date = datetime.now()
     conn = psycopg2.connect(
         dbname="calculator",
         user="calculator",
