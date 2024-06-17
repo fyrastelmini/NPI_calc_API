@@ -20,7 +20,7 @@ Il existe deux versions de cet API, les deux connectées sur la même base de do
 Les deux versions ont leurs documentations sous le chemin `/docs`.
 
 # Pour le développement:
-# Installation, Pytest, Linting, Formatting
+**Installation, Pytest, Linting, Formatting**
 ```bash
 make all
 ```
